@@ -1,6 +1,8 @@
 document.getElementById("postForm").addEventListener("submit", async (e) => {
   e.preventDefault();
-
+  // Log the button click
+  console.log("🚀 Form submitted!"); 
+  
   const payload = {
     name_first: document.getElementById("name_first").value,
     name_last: document.getElementById("name_last").value,
@@ -14,7 +16,9 @@ document.getElementById("postForm").addEventListener("submit", async (e) => {
     birth_date: document.getElementById("birth_date").value,
     address_country_code: "US" // Hardcoded to US
 };
-
+// Log the payload
+  console.log("📦 Sending to backend:", payload);
+  
   const statusDiv = document.getElementbyId("statusMessage");
   const outputDiv = document.getelementbyId("output");
 
@@ -26,10 +30,16 @@ document.getElementById("postForm").addEventListener("submit", async (e) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({payload})
   });
-
+// Log the HTTP status   
+  console.log("Server response status:", response.status);
+  
   const result = await response.json();
-
+// Log the full object Alloy returned
+    console.log("Data received from backend:", result);
+  
   const outcome = result.summary?.outcome;
+  // Log the outcome from Alloy 
+    console.log("Outcome received from backend:", outcome);
 
   if (outcome == "Approved") {
      statusDiv.textContent = "Application Approved!";
