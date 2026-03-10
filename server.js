@@ -9,13 +9,17 @@ app.use(express.json());
 app.use(express.static("public")); // serve frontend files
 
 app.post("/api/post", async (req, res) => {
-  try {
-    const payload = req.body;
+  try { 
+  // Basic Authentication with base64 encoding 
+    const authString = `${process.env.API_TOKEN}:${process.env.API_SECRET}`;
+    const encodedAuth = Buffer.from(authString).toString('base64');
 
+   // Alloy API 
+    const payload = req.body;
     const response = await fetch("https://sandbox.alloy.co/v1/evaluations", {
       method: "POST",
       headers: {
-        "Authorization": `Bearer ${process.env.API_TOKEN}`,
+    // "Authorization": `Bearer ${process.env.API_TOKEN}`,
         "Accept": "application/json",
         "Content-Type": "application/json"
       },
