@@ -1,7 +1,7 @@
 document.getElementById("postForm").addEventListener("submit", async (e) => {
   e.preventDefault();
   // Log the button click
-  console.log("🚀 Form submitted!"); 
+  console.log("Form submitted!"); 
   
   const payload = {
     name_first: document.getElementById("name_first").value,
@@ -17,7 +17,7 @@ document.getElementById("postForm").addEventListener("submit", async (e) => {
     address_country_code: "US" // Hardcoded to US
 };
 // Log the payload
-  console.log("📦 Sending to backend:", payload);
+  console.log("Sending to backend:", payload);
   
   const statusDiv = document.getElementbyId("statusMessage");
   const outputDiv = document.getelementbyId("output");
