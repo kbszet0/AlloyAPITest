@@ -1,7 +1,7 @@
 document.getElementById("postForm").addEventListener("submit", async (e) => {
   e.preventDefault();
   // Log the button click
-  console.log("🚀 Form submitted!"); 
+  console.log("Form submitted!"); 
   
   const payload = {
     name_first: document.getElementById("name_first").value,

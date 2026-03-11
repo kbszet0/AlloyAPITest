@@ -1,39 +1,55 @@
-<!DOCTYPE html> <html> <head> <meta charset="UTF-8" /> <title>Customer Banking Application</title> </head> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Banking Application</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: sans-serif; max-width: 480px; margin: 2rem auto; padding: 0 1rem; color: #333; }
+    h1 { font-size: 1.3rem; margin-bottom: 1.5rem; }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; }
+    .span { grid-column: span 2; }
+    .sec { grid-column: span 2; font-size: 11px; font-weight: bold; text-transform: uppercase; color: #999; margin-top: 10px; }
+    .sec:first-child { margin-top: 0; }
+    label { font-size: 13px; color: #555; }
+    input, select { display: block; width: 100%; margin-top: 3px; padding: 7px; font-size: 14px; border: 1px solid #ccc; border-radius: 3px; }
+    input:focus, select:focus { outline: none; border-color: #4a90d9; }
+    button { grid-column: span 2; margin-top: 8px; padding: 9px; font-size: 14px; font-weight: bold; color: #fff; background: #4a90d9; border: none; border-radius: 3px; cursor: pointer; }
+    button:hover { background: #3a7bc8; }
+    #statusMessage { margin-top: 10px; }
+    #statusMessage:empty { display: none; }
+    .status-banner { padding: 9px 12px; border-radius: 3px; font-size: 13px; }
+    .approved { background: #e6f4ea; color: #1a7f37; }
+    .denied { background: #fdecea; color: #a1243b; }
+    .review { background: #fff8e1; color: #8a6d00; }
+    .loading { background: #e8f0fe; color: #1a56db; }
+    .error { background: #fdecea; color: #a1243b; }
+    #output { display: none; }
+  </style>
+</head>
+<body>
+  <h1>Customer Application</h1>
+  <form id="postForm" class="grid">
+    <div class="sec">Personal Information</div>
+    <div><label>First Name<input type="text" id="name_first" required /></label></div>
+    <div><label>Last Name<input type="text" id="name_last" required /></label></div>
+    <div><label>Email<input type="email" id="email_address" required /></label></div>
+    <div><label>Date of Birth<input type="date" id="birth_date" required /></label></div>
 
-<body> <h1>Customer Form</h1> <form id="postForm">
+    <div class="sec">Address</div>
+    <div class="span"><label>Street Address<input type="text" id="address_line_1" required /></label></div>
+    <div class="span"><label>Apt / Suite<input type="text" id="address_line_2" /></label></div>
+    <div><label>City<input type="text" id="address_city" required /></label></div>
+    <div><label>State<select id="address_state" required></select></label></div>
+    <div><label>Zip<input type="text" id="address_postal_code" pattern="\d{5}" maxlength="5" required /></label></div>
+    <div><label>Country<select id="address_country_code" required><option value="US">US</option></select></label></div>
+    <div class="span"><label>Social Security Number<input type="text" id="document_ssn" pattern="\d{9}" maxlength="9" required /></label></div>
 
-<label>First Name:</label> <input type="text" id="name_first" required /> <br>
-
-<label>Last Name:</label>
-<input type="text" id="name_last" required /> <br>
-
-<label>Address Line 1:</label>
-<input type="text" id="address_line_1" required /> <br>
-
-<label>Address Line 2:</label>
-<input type="text" id="address_line_2" /> <br>
-
-<label>City:</label>
-<input type="text" id="address_city" required /> <br>
-
-<label>State:</label>
-<input type="text" id="address_state" pattern="[A-Za-z]{2}" maxlength="2" required /> <br>
-
-<label>Zip/Postal Code:</label>
-<input type="text" id="address_postal_code" pattern="\d{5}" maxlength="5" required />
-
-<label>Country:</label>
-<select name="country" id="address_country_code" value="US" required />  <option value = "US"> US </option> <br> </select> <br>
-
-<label>Social Security Number:</label>
-<input type="text" id="document_ssn" pattern="\d{3}-\d{2}-\d{4}" placeholder="xxx-xx-xxxx" required /> <br>
-
-<label>Email:</label>
-<input type="email" id="email" required /> <br>
-
-<label>Date of Birth:</label>
-<input type="date" id="birth_date" required /> <br>
-
-
-
-<button type="submit">Submit Application</button> </form> <pre id="output"></pre> </body> </html>
+    <button type="submit">Submit Application</button>
+  </form>
+  <div id="statusMessage"></div>
+  <pre id="output"></pre>
+  <script src="main.js"></script>
+</body>
+</html>

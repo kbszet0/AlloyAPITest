@@ -14,12 +14,13 @@ app.post("/api/post", async (req, res) => {
     const authString = `${process.env.API_TOKEN}:${process.env.API_SECRET}`;
     const encodedAuth = Buffer.from(authString).toString('base64');
 
-   // Alloy API 
+   // Alloy API
     const payload = req.body;
+    console.log("Sending to Alloy:", JSON.stringify(payload, null, 2));
     const response = await fetch("https://sandbox.alloy.co/v1/evaluations", {
       method: "POST",
       headers: {
-    // "Authorization": `Bearer ${process.env.API_TOKEN}`,
+        "Authorization": `Basic ${encodedAuth}`,
         "Accept": "application/json",
         "Content-Type": "application/json"
       },
@@ -27,6 +28,7 @@ app.post("/api/post", async (req, res) => {
     });
 
     const data = await response.json();
+    console.log("Alloy response:", response.status, data.summary?.outcome);
     res.status(response.status).json(data);
 
   } catch (err) {
